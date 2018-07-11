@@ -55,17 +55,25 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("user", user);
 
 
-            Cookie rememberCookie = new Cookie("remembermeCheckbox","on");
-            Cookie usernameCookie = new Cookie("username",user.getUsername());
             if(req.getParameter("rememberme")!=null){
+                Cookie rememberCookie = new Cookie("remembermeCheckbox","on");
+                Cookie usernameCookie = new Cookie("username",user.getUsername());
                 rememberCookie.setMaxAge(600);
                 usernameCookie.setMaxAge(600);
+                resp.addCookie(rememberCookie);
+                resp.addCookie(usernameCookie);
             }else{
-                rememberCookie.setMaxAge(0);
-                usernameCookie.setMaxAge(0);
+                for(Cookie cookie:req.getCookies()){
+                    if(cookie.getName().equals("username")){
+                        cookie.setMaxAge(0);
+                        resp.addCookie(cookie);
+                    }
+                    if(cookie.getName().equals("remembermeCheckbox")){
+                        cookie.setMaxAge(0);
+                        resp.addCookie(cookie);
+                    }
+                }
             }
-            resp.addCookie(rememberCookie);
-            resp.addCookie(usernameCookie);
 
 
             resp.sendRedirect(req.getContextPath() + "/logon");
