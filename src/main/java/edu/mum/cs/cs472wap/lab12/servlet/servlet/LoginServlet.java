@@ -9,7 +9,7 @@ import javax.servlet.http.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(value = "/", name = "loginServlet")
+@WebServlet(urlPatterns = "/", name = "loginServlet")
 public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

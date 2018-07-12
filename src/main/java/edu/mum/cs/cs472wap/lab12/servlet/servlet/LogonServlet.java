@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(value = "/logon", name = "logonServlet")
+@WebServlet(urlPatterns = "/logon", name = "logonServlet")
 public class LogonServlet extends HttpServlet {
 
     @Override
